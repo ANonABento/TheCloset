@@ -1,4 +1,4 @@
-package ICSProject.Test;
+package ICSProject.TheCloset;
 
 /**
  * Hello world!
