@@ -11,7 +11,7 @@ import org.alicebot.ab.utils.IOUtils;
 
 public class main {
 	
-	//variable declearation
+	//variables
 	private static final boolean TRACE_MODE = false;
 	static String botName = "super";
 	
