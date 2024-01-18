@@ -19,7 +19,7 @@ public class sketch extends PApplet {
         text(robotResponse, width / 2, height / 2);
 	}
 	
-	public void toScreen(String response) {
+	public void changeRobotResponse(String response) {
         this.robotResponse = response;
     }
 }

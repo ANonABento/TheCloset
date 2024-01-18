@@ -12,14 +12,14 @@ import org.alicebot.ab.utils.IOUtils;
 
 public class main {
 
-    // variables
+    // variable declaration
     private static final boolean TRACE_MODE = false;
     static String botName = "super";
 
     public static void main(String[] args) {
 
-        sketch sketchApplet = new sketch(); // Corrected the class name
-        PApplet.runSketch(new String[]{"ICSProject.TheCloset.sketch"}, sketchApplet); // Corrected the class name
+        sketch theScreen = new sketch();
+        PApplet.runSketch(new String[]{"ICSProject.TheCloset.sketch"}, theScreen);
 
         try {
 
@@ -53,7 +53,7 @@ public class main {
                     while (response.contains("&gt;"))
                         response = response.replace("&gt;", ">");
                     System.out.println("Robot : " + response);
-                    sketchApplet.toScreen(response); // Corrected the method call
+                    theScreen.changeRobotResponse(response);
                 }
             }
         } catch (Exception e) {
