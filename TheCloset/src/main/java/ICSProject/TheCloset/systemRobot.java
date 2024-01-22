@@ -16,11 +16,12 @@ public class systemRobot {
     private static final boolean TRACE_MODE = false;
     static String botName = "super";
 
-    public void startSystem() {
+    public void startSystem(){
 
     	//start graphics
     	//TypingAnimation theScreen = new TypingAnimation();
         sketchRobot theScreen = new sketchRobot();
+        //PApplet.runSketch(new String[]{"ICSProject.TheCloset.sketchMain"}, theScreen);
         
         //audio for robot
         voiceRobot toVoice = new voiceRobot();
