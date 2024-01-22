@@ -21,6 +21,9 @@ public class main {
     	//TypingAnimation theScreen = new TypingAnimation();
         sketch theScreen = new sketch();
         PApplet.runSketch(new String[]{"ICSProject.TheCloset.TypingAnimation"}, theScreen);
+        
+        //audio
+        voiceTest toVoice = new voiceTest();
 
         try {
 
@@ -54,7 +57,11 @@ public class main {
                     while (response.contains("&gt;"))
                         response = response.replace("&gt;", ">");
                     System.out.println("Robot : " + response);
+                    
+                    //send robot response
                     theScreen.changeRobotResponse(response);
+                    voiceTest.SpeakText(response);
+                    
                 }
             }
         } catch (Exception e) {
