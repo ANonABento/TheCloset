@@ -34,6 +34,6 @@ public class sketch extends PApplet {
 	public void changeRobotResponse(String response) {
         this.robotResponse = response;
         typingAnimationIndex = 0;
-        typingAnimationRunning = false;
+        typingAnimationRunning = true;
     }
 }
