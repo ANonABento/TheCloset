@@ -19,5 +19,15 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/Ab.jar"/>
 	<classpathentry kind="lib" path="lib/core.jar"/>
+	<classpathentry kind="lib" path="lib/tts/cmu_time_awb.jar"/>
+	<classpathentry kind="lib" path="lib/tts/cmu_us_kal.jar"/>
+	<classpathentry kind="lib" path="lib/tts/cmudict04.jar"/>
+	<classpathentry kind="lib" path="lib/tts/cmulex.jar"/>
+	<classpathentry kind="lib" path="lib/tts/cmutimelex.jar"/>
+	<classpathentry kind="lib" path="lib/tts/en_us.jar"/>
+	<classpathentry kind="lib" path="lib/tts/freetts.jar"/>
+	<classpathentry kind="lib" path="lib/tts/freetts-jsapi10.jar"/>
+	<classpathentry kind="lib" path="lib/tts/jsapi.jar"/>
+	<classpathentry kind="lib" path="lib/tts/mbrola.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
