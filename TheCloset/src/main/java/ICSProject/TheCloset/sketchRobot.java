@@ -2,9 +2,9 @@ package ICSProject.TheCloset;
 
 import processing.core.PApplet;
 
-public class sketch extends PApplet {
+public class sketchRobot extends PApplet {
 	//variable declaration
-	String robotResponse = "hello";
+	String robotResponse = "";
 	int typingAnimationIndex = 0;
     boolean typingAnimationRunning = true;
     int textColor = 255;  // Initial text color (white)
@@ -12,6 +12,9 @@ public class sketch extends PApplet {
 	
 	public void settings() {
 		size(400, 700);
+		//start the robot system
+		systemRobot systemRobot = new systemRobot();
+		systemRobot.startSystem();
 	}
 
 	public void draw(){

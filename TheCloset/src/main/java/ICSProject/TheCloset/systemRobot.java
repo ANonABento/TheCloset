@@ -10,20 +10,20 @@ import org.alicebot.ab.MagicBooleans;
 import org.alicebot.ab.MagicStrings;
 import org.alicebot.ab.utils.IOUtils;
 
-public class main {
+public class systemRobot {
 
     // variable declaration
     private static final boolean TRACE_MODE = false;
     static String botName = "super";
 
-    public static void main(String[] args) {
+    public void startSystem() {
 
+    	//start graphics
     	//TypingAnimation theScreen = new TypingAnimation();
-        sketch theScreen = new sketch();
-        PApplet.runSketch(new String[]{"ICSProject.TheCloset.TypingAnimation"}, theScreen);
+        sketchRobot theScreen = new sketchRobot();
         
-        //audio
-        voiceTest toVoice = new voiceTest();
+        //audio for robot
+        voiceRobot toVoice = new voiceRobot();
 
         try {
 
@@ -60,7 +60,7 @@ public class main {
                     
                     //send robot response
                     theScreen.changeRobotResponse(response);
-                    voiceTest.SpeakText(response);
+                    toVoice.SpeakText(response);
                     
                 }
             }

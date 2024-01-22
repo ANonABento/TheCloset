@@ -3,7 +3,7 @@ package ICSProject.TheCloset;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 
-public class voicetest2 {
+public class voiceList {
     private static Voice[] voices;
 
     public static void main(String[] args) throws Exception {
