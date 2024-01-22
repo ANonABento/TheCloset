@@ -18,6 +18,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="lib/Ab.jar"/>
-	<classpathentry kind="lib" path="C:/Users/kevbe/Downloads/processing-4.3-windows-x64/processing-4.3/core/library/core.jar"/>
+	<classpathentry kind="lib" path="lib/core.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

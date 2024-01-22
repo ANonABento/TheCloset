@@ -18,8 +18,9 @@ public class main {
 
     public static void main(String[] args) {
 
+    	//TypingAnimation theScreen = new TypingAnimation();
         sketch theScreen = new sketch();
-        PApplet.runSketch(new String[]{"ICSProject.TheCloset.sketch"}, theScreen);
+        PApplet.runSketch(new String[]{"ICSProject.TheCloset.TypingAnimation"}, theScreen);
 
         try {
 
