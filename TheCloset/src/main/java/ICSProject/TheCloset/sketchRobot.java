@@ -7,14 +7,17 @@ public class sketchRobot extends PApplet {
 	String robotResponse = "";
 	int typingAnimationIndex = 0;
     boolean typingAnimationRunning = true;
-    int textColor = 255;  // Initial text color (white)
+    int textColor = 255;
 	
+	public void setup() {
+		//start the robot system in a separate thread
+        systemRobot robotSystem = new systemRobot(this);
+        Thread systemThread = new Thread(robotSystem);
+        systemThread.start();
+	}
 	
 	public void settings() {
 		size(400, 700);
-		//start the robot system
-		systemRobot systemRobot = new systemRobot();
-		systemRobot.startSystem();
 	}
 
 	public void draw(){
@@ -27,10 +30,13 @@ public class sketchRobot extends PApplet {
         text(currentRobotResponse, width / 2, height / 2);
         
         if (typingAnimationRunning) {
-        	typingAnimationIndex++;
+        	//delay in the animation
+        	if (frameCount % 4 == 0) {
+                typingAnimationIndex++; //add a letter to the display
+            }
 
             if (typingAnimationIndex > robotResponse.length()) {
-            	typingAnimationRunning = false;  // Stop the animation when it reaches the end of the string
+            	typingAnimationRunning = false;  //stop the animation when it reaches the end of the string
             }
         }
 	}

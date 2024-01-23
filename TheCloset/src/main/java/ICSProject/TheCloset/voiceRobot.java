@@ -11,7 +11,7 @@ public class voiceRobot {
 		//set the path to the MBROLA base directory
 		//the link has to be the direct directory url of the mbrola library: 
 		//a mbrola has already been included in this project directory so just change the user area
-        System.setProperty("mbrola.base", "C:\\Users\\kevbe\\git\\Test\\TheCloset\\TheCloset\\mbrola");
+        System.setProperty("mbrola.base", "C:\\Users\\kevin\\git\\TheCloset\\TheCloset\\mbrola");
         //set the FreeTTS voices to use the MbrolaVoiceDirectory
         System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory,de.dfki.lt.freetts.en.us.MbrolaVoiceDirectory");
         

@@ -10,17 +10,22 @@ import org.alicebot.ab.MagicBooleans;
 import org.alicebot.ab.MagicStrings;
 import org.alicebot.ab.utils.IOUtils;
 
-public class systemRobot {
+public class systemRobot implements Runnable{
 
     // variable declaration
-    private static final boolean TRACE_MODE = false;
-    static String botName = "super";
+	private static final boolean TRACE_MODE = false;
+	static String botName = "super";
+	private sketchRobot parent;
+	
+	public systemRobot(sketchRobot parent) {
+		this.parent = parent;
+	}
 
-    public void startSystem(){
+    public void run(){
 
     	//start graphics
     	//TypingAnimation theScreen = new TypingAnimation();
-        sketchRobot theScreen = new sketchRobot();
+        sketchRobot toScreen = new sketchRobot();
         //PApplet.runSketch(new String[]{"ICSProject.TheCloset.sketchMain"}, theScreen);
         
         //audio for robot
@@ -48,19 +53,20 @@ public class systemRobot {
                     System.exit(0);
                 } else {
                     String request = textLine;
-                    if (MagicBooleans.trace_mode)
-                        System.out.println(
-                                "STATE=" + request + ":THAT=" + ((History) chatSession.thatHistory.get(0)).get(0)
-                                        + ":TOPIC=" + chatSession.predicates.get("topic"));
+                    if (MagicBooleans.trace_mode) {
+                    	System.out.println("STATE=" + request + ":THAT=" + ((History) chatSession.thatHistory.get(0)).get(0) + ":TOPIC=" + chatSession.predicates.get("topic"));
+                    }
                     String response = chatSession.multisentenceRespond(request);
-                    while (response.contains("&lt;"))
-                        response = response.replace("&lt;", "<");
-                    while (response.contains("&gt;"))
-                        response = response.replace("&gt;", ">");
+                    while (response.contains("&lt;")) {
+                    	response = response.replace("&lt;", "<");
+                    }
+                    while (response.contains("&gt;")) {
+                    	response = response.replace("&gt;", ">");
+                    }
                     System.out.println("Robot : " + response);
                     
                     //send robot response
-                    theScreen.changeRobotResponse(response);
+                    parent.changeRobotResponse(response);
                     toVoice.SpeakText(response);
                     
                 }
