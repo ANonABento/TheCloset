@@ -3,9 +3,9 @@ package ICSProject.TheCloset;
 import processing.core.PApplet;
 import processing.core.PImage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class sketchMenu extends PApplet{
 	
@@ -13,12 +13,14 @@ public class sketchMenu extends PApplet{
 	PImage imgDoorClosed;
 	PImage imgRainbow;
 	
-	String userInfo = "txt/userInfo";
+	String username;
+	boolean loggedIn = false;
 	
 	boolean isExitHovered = false;
 	
 	public void settings() {
 		size(400, 700);
+		checkUser();
 	}
 	
 	public void setup() {
@@ -71,10 +73,16 @@ public class sketchMenu extends PApplet{
 		if (mouseX > 70 && mouseX < 160 && mouseY > 200 & mouseY < 360) {
 			//delete this window
 		    surface.setVisible(false);
-		    	
-		    //create a new window for their profile
-		    sketchProfile sketchProfile = new sketchProfile();
-		    PApplet.runSketch(new String[]{"ICSProject.TheCloset.sketchProfile"}, sketchProfile);
+		    
+		    if (loggedIn) {
+		    	//create a new window for their profile
+			    sketchProfile sketchProfile = new sketchProfile();
+			    PApplet.runSketch(new String[]{"ICSProject.TheCloset.sketchProfile"}, sketchProfile);
+		    }
+		    else {
+		    	sketchLogin sketchLogin = new sketchLogin();
+			    PApplet.runSketch(new String[]{"ICSProject.TheCloset.sketchLogin"}, sketchLogin);
+		    }
 		}
 		else if (mouseX > 240 && mouseX < 330 && mouseY > 200 & mouseY < 360) {
 			//delete this window
@@ -103,7 +111,6 @@ public class sketchMenu extends PApplet{
 		
 		//exit bar
 	    if (isExitHovered) {
-	        // Do something when the exit bar is clicked
 	        exit();
 	    }
 	}
@@ -133,13 +140,37 @@ public class sketchMenu extends PApplet{
 	    text("Exit", 200, 670);
 	}
 	
+	private void checkUser() {
+        try {
+        	//create a Scanner object
+            Scanner scanner = new Scanner(new File("data/txt/blank"));
+
+            //check if the file has any content
+            if (scanner.hasNext()) {
+            	loggedIn = true;
+                //read first line which contains username
+            	String[] firstLine = scanner.nextLine().split(": ", 2);
+                username = firstLine[1];
+            }
+            else {
+            	loggedIn = false;
+            }
+
+            // Close the scanner
+            scanner.close();
+        } 
+        catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+	}
+	
 	private void welcomeUser() {
 		String welcomeMsg;
-		if (true) {
+		if (!loggedIn) {
 			welcomeMsg = "Welcome!";
 		}
 		else {
-			welcomeMsg = "Welcome back, " + "a" + "!";
+			welcomeMsg = "Welcome back, " + username + "!";
 		}
 		
 		textSize(28);

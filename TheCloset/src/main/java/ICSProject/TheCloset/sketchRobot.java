@@ -8,6 +8,9 @@ public class sketchRobot extends PApplet {
 	int typingAnimationIndex = 0;
     boolean typingAnimationRunning = true;
     int textColor = 255;
+    //user input
+  	String userInput = "";
+  	String userResponse = "";
 	
 	public void setup() {
 		//start the robot system in a separate thread
@@ -51,4 +54,21 @@ public class sketchRobot extends PApplet {
         // Change text color when the mouse is pressed
         textColor = color(random(255), random(255), random(255));
     }
+	
+	//method whenever keyboard is pressed
+	public void keyPressed() {
+		if (keyCode == BACKSPACE) {
+			if (userInput.length() > 0) {
+				userInput = userInput.substring(0, userInput.length() - 1);
+				userResponse = userInput;		
+			}
+		} 
+		else if (key != ENTER) {
+			userInput += key;
+			userResponse = userInput;	
+		} 
+		else if (key == ENTER) {
+			userInput = "";
+		}
+	}
 }
