@@ -3,11 +3,17 @@ package ICSProject.TheCloset;
 import processing.core.PApplet;
 import processing.core.PImage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class sketchMenu extends PApplet{
 	
 	PImage imgDoorOpen;
 	PImage imgDoorClosed;
 	PImage imgRainbow;
+	
+	String userInfo = "txt/userInfo";
 	
 	boolean isExitHovered = false;
 	
@@ -26,8 +32,8 @@ public class sketchMenu extends PApplet{
 		image(imgRainbow, 0, 0);
 		
 		//header
-		fill(0, 30); rect(20, 100, 200, 70, 90, 90, 0, 0);
-		fill(0); text("Profile", 118, 185);
+		fill(0, 30); rect(20, 20, 360, 120, 40, 40, 40, 40);
+		welcomeUser();
 		
 		//text customization
 		textSize(20);
@@ -114,19 +120,32 @@ public class sketchMenu extends PApplet{
 		noStroke();
 
 	    if (mouseX > 20 && mouseX < 380 && mouseY > 650 && mouseY < 690) {
-	        fill(24, 240);
-	        rect(20, 650, 360, 40, 90, 90, 90, 90);
+	        fill(24, 240); rect(20, 650, 360, 40, 90, 90, 90, 90);
 	        isExitHovered = true;
 	        fill(255);
 	    } else {
-	        fill(24, 90);
-	        rect(20, 650, 360, 40, 90, 90, 90, 90);
+	        fill(24, 30); rect(20, 650, 360, 40, 90, 90, 90, 90);
 	        isExitHovered = false;
 	        fill(0);
 	    }
 
 	    textAlign(CENTER, CENTER);
 	    text("Exit", 200, 670);
+	}
+	
+	private void welcomeUser() {
+		String welcomeMsg;
+		if (true) {
+			welcomeMsg = "Welcome!";
+		}
+		else {
+			welcomeMsg = "Welcome back, " + "a" + "!";
+		}
+		
+		textSize(28);
+		textAlign(CENTER, CENTER);
+		fill(0);
+		text(welcomeMsg, 200, 80);
 	}
 }
 		    
