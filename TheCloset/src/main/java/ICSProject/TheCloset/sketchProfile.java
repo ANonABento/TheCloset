@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class sketchProfile extends PApplet {
 	
-	private profile userProfile;
+	private profileUser userProfile;
 	
 	public void settings() {
 		size(400, 700);
@@ -34,37 +34,37 @@ public class sketchProfile extends PApplet {
     }
 	
 	private void readUserProfile(Scanner scanner) {
-        if (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
-            String[] arrLine = line.split(": ", 2);
-
-            if (arrLine.length == 2) {
-                String label = arrLine[0];
-                String value = arrLine[1];
-
-                switch (label) {
-                    case "Username":
-                        userProfile.username = value;
-                        break;
-                    case "Password":
-                        userProfile.password = value;
-                        break;
-                    case "Orientation":
-                        userProfile.orientation = value;
-                        break;
-                    case "Status":
-                        userProfile.status = value;
-                        break;
-                    case "Identity":
-                        userProfile.identity = value;
-                        break;
-                }
-            }
-
-            // Recursive call to read the next line
-            readUserProfile(scanner);
-        }
-    }
+	    //check if there is another line in the file
+	    if (scanner.hasNextLine()) {
+	        //store that line as a string
+	        String line = scanner.nextLine();
+	        //split the line into two parts using ": "
+	        String[] arrLine = line.split(": ", 2);
+	        //extract array into two strings
+	        String label = arrLine[0];
+	        String value = arrLine[1];
+	        //switch statement to match the label update user profile
+	        switch (label) {
+	        	case "Username":
+	        		userProfile.username = value;
+	                break;
+	            case "Password":
+	                userProfile.password = value;
+	                break;
+	            case "Orientation":
+	                userProfile.orientation = value;
+	                break;
+	            case "Status":
+	                userProfile.toStatus(value);
+	                break;
+	            case "Identity":
+	                userProfile.identity = value;
+	                break;
+	        }
+	    //recursive call
+	    readUserProfile(scanner);
+	    }
+	}
 	
 	private void displayUserProfile() {
         // Display user profile information on the screen

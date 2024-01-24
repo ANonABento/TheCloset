@@ -1,6 +1,7 @@
 package ICSProject.TheCloset;
 
 public class profile {
+	
     String username;
     String password;
     String orientation;
@@ -35,5 +36,9 @@ public class profile {
         this.identity = "Questioning";
         this.status = status;
     }
+    
+    public String toString() {
+		return username + "/" + password + "/" + orientation + "/" + identity + "/" + status.toString();
+	}
     
 }

@@ -150,31 +150,41 @@ public class sketchLogin extends PApplet{
 	}
 	
 	private void checkUser() {
-		try {
-			// create a Scanner object
-		    Scanner scanner = new Scanner(new File("data/txt/userInfo"));
+	    try {
+	        Scanner scanner = new Scanner(new File("data/txt/userInfo"));
 
-		    // read first line which contains user name
-		    String[] firstLine = scanner.nextLine().split(": ", 2);
-		    String[] secondLine = scanner.nextLine().split(": ", 2);
-		    if (firstLine[1].equals(nameText) && secondLine[1].equals(passwordText)) {
-		    	//delete this window
-			    surface.setVisible(false);
+	        //2D array to store user information
+	        String[][] users = new String[2][2];
 
-		    	//create a new window for their profile
-			    sketchProfile sketchProfile = new sketchProfile();
-			    PApplet.runSketch(new String[]{"ICSProject.TheCloset.sketchMenu"}, sketchProfile);;
-		    } 
-		    else {
-		    	signInText = "Retry";
-		    	nameText = "";
-		    	passwordText = "";
-		    }
+	        //add user information from the file to array
+	        for (int i = 0; i < users.length; i++) {
+	            String[] userInfo = scanner.nextLine().split(": ", 2);
+	            users[i][0] = userInfo[0]; //label
+	            users[i][1] = userInfo[1]; //info
+	        }
 
-		    // Close the scanner
-		    scanner.close();
-		} catch (FileNotFoundException e) {
-		    e.printStackTrace();
-		}
+	        //check if user and password match
+	        boolean credentialsMatch = false;
+	        if (users[0][1].equals(nameText) && users[1][1].equals(passwordText)) {
+	           credentialsMatch = true;
+	        }
+
+	        if (credentialsMatch) {
+	            //logged in so go to the profile window
+	            surface.setVisible(false);
+	            sketchProfile sketchProfile = new sketchProfile();
+	            PApplet.runSketch(new String[]{"ICSProject.TheCloset.sketchMenu"}, sketchProfile);
+	        } else {
+	            //don't match so notify user
+	            signInText = "Retry";
+	            nameText = "";
+	            passwordText = "";
+	        }
+
+	        //close the scanner
+	        scanner.close();
+	    } catch (FileNotFoundException e) {
+	        e.printStackTrace();
+	    }
 	}
 }
