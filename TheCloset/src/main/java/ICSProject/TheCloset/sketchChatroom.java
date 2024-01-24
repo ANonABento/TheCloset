@@ -7,9 +7,14 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class sketchChatroom extends PApplet {
 
     ConcurrentLinkedQueue<String> messageQueue = new ConcurrentLinkedQueue<>();
+    String userText;
     
     public void settings() {
         size(400, 700);
@@ -20,6 +25,7 @@ public class sketchChatroom extends PApplet {
     	background(32);
         displayChat();
         displayMessages();
+        
     }
 
     private void setupChatRoom() {
@@ -46,19 +52,18 @@ public class sketchChatroom extends PApplet {
         }
     }
 
-    private void writeMessages() {
+    private void writeMessage() {
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            BufferedWriter writer = new BufferedWriter(new FileWriter("data/txt/chatroom1", true));
+            FileWriter writer = new FileWriter("data/txt/chatroom1", true);
 
-            while (true) {
-                // Read user input and write it to the file
-                String userInput = reader.readLine();
-                writer.write(userInput);
-                writer.newLine();
-                writer.flush();
-            }
-        } catch (IOException e) {
+            String userInput = userText;
+            //write user input to the file and add new line
+            writer.write(userInput + "\n");
+            
+            //close the writer
+            writer.close();
+        } 
+    	catch (IOException e) {
             e.printStackTrace();
         }
     }
