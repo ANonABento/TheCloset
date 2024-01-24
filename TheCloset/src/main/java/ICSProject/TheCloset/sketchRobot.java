@@ -96,7 +96,12 @@ public class sketchRobot extends PApplet {
 		
 		//exit bar
 	    if (isExitHovered) {
-	        exit();
+	    	//delete this window
+		    surface.setVisible(false);
+		    
+	    	//create a new window for their profile
+		    sketchMenu sketchMenu = new sketchMenu();
+		    PApplet.runSketch(new String[]{"ICSProject.TheCloset.sketchMenu"}, sketchMenu);
 	    }
     }
 	
@@ -145,6 +150,6 @@ public class sketchRobot extends PApplet {
 	    }
 
 	    textAlign(CENTER, CENTER);
-	    text("Exit", 200, 670);
+	    text("Back", 200, 670);
 	}
 }
