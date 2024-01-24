@@ -31,7 +31,7 @@ public class sketchMain extends PApplet{
 		text("by Kevin Jiang", 220, 580);
 		
 		//delay for 2000 milliseconds
-		if (millis() - startTime > 000) {
+		if (millis() - startTime > 2000) {
 		    nextScreen(); //method to go to the menu
 		    noLoop(); //stop this class's draw loop
 		}

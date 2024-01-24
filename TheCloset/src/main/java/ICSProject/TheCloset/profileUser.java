@@ -6,9 +6,14 @@ public class profileUser extends profile {
 	int reportsMade;
 	statusBadge selfStatus;
 	
+	public profileUser() {
+		super("", "", null);
+		selfStatus = new statusBadge();
+	}
+	
 	public profileUser(String username, String password, statusBadge status) {
 		super(username, password, status);
-		// TODO Auto-generated constructor stub
+		selfStatus = new statusBadge();
 	}
 	
 	public void toStatus(String statusName) {

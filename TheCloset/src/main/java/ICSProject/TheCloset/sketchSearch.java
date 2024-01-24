@@ -21,16 +21,16 @@ public class sketchSearch extends PApplet {
 	String userInput = "";
 	String searchBarInput = "";
     
-    PImage imgRainbow;
+    PImage imgRainbow2;
 
     public void settings() {
         size(400, 700);
-        imgRainbow = loadImage("images/rainbowBG.jpg");
+        imgRainbow2 = loadImage("images/rainbow2BG.jpg");
     }
 
     public void draw() {
         background(54);
-        image(imgRainbow, 0, 0);
+        image(imgRainbow2, 0, 0, 600, 700);
         
         drawSearchBar();
         displayMatchingNames();
@@ -49,7 +49,7 @@ public class sketchSearch extends PApplet {
     }
 
     private void displayMatchingNames() {
-        fill(255, 90);
+        fill(255, 170);
         rect(20, 80, width - 40, height - 150, 10);
 
         fill(0);
