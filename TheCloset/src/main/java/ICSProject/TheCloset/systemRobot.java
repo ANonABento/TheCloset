@@ -35,7 +35,7 @@ public class systemRobot implements Runnable {
 
             while (true) {
                 textLine = userResponse;
-                System.out.println(textLine);
+                System.out.println(textLine); //to future me: very important do not delete
 
                 if (textLine != null && !textLine.isEmpty()) {
                     String request = textLine;
@@ -74,7 +74,7 @@ public class systemRobot implements Runnable {
         return resourcesPath;
     }
 
-    public synchronized void userResponse(String userInput) {
+    public void userResponse(String userInput) {
         this.userResponse = userInput;
     }
 }
