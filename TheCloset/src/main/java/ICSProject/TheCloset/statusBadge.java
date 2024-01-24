@@ -17,6 +17,13 @@ public class statusBadge {
     public statusBadge(String status) {
         this.status = status;
     }
+    /**
+     * Default constructor with no values
+     *
+     */
+    public statusBadge() {
+        this.status = "member";
+    }
     
     /**
      * Increases the reported count for the user status badge.

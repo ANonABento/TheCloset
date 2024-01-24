@@ -41,4 +41,8 @@ public class profileUser extends profile {
 	public String toString() {
 		return username + "/" + password + "/" + orientation + "/" + identity + "/" + selfStatus.toString();
 	}
+	
+	public void toStatus(String value) {
+		this.selfStatus.setStatus(value);
+	}
 }
