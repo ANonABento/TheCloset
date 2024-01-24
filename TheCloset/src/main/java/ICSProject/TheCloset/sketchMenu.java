@@ -143,7 +143,7 @@ public class sketchMenu extends PApplet{
 	private void checkUser() {
         try {
         	//create a Scanner object
-            Scanner scanner = new Scanner(new File("data/txt/blank"));
+            Scanner scanner = new Scanner(new File("data/txt/userInfo"));
 
             //check if the file has any content
             if (scanner.hasNext()) {
