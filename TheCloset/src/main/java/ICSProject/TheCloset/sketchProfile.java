@@ -7,20 +7,36 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * This class represents the user profile screen of the application using Processing.
+ * It displays the user's profile information, including username, orientation, identity, and status.
+ */
 public class sketchProfile extends PApplet {
 	
+	//images
 	PImage imgRainbow3;
 
+	//user info
     private profileUser userProfile;
+    
+    //buttons check
     boolean isExitHovered = false;
 	boolean isEnterHovered = false;
 
+	/**
+     * Setup method to initialize the profile screen.
+     * Loads the background image and retrieves the user profile information.
+     */
     public void settings() {
         size(400, 700);
         imgRainbow3 = loadImage("images/rainbow3BG.jpg");
         checkUser();
     }
 
+    /**
+     * Draw method to continuously update and render the user profile screen.
+     * Displays the user's profile information and provides an option to go back to the main menu.
+     */
     public void draw() {
     	image(imgRainbow3, -250, 0, 900, 700);
     	
@@ -30,10 +46,15 @@ public class sketchProfile extends PApplet {
       	backBar();
     }
 
+    /**
+     * Method to check and retrieve the user profile information from the file.
+     */
     private void checkUser() {
         try {
+        	//new scanner object
             Scanner scanner = new Scanner(new File("data/txt/userInfo"));
 
+            //read profile
             userProfile = new profileUser();
             readUserProfile(scanner);
 
@@ -44,6 +65,12 @@ public class sketchProfile extends PApplet {
         }
     }
 
+    /**
+     * Recursive method to read the user profile information from the file.
+     * Updates the user profile object accordingly.
+     *
+     * @param scanner Scanner object for reading from the file.
+     */
     private void readUserProfile(Scanner scanner) {
         // check if there is another line in the file
         if (scanner.hasNextLine()) {
@@ -77,6 +104,10 @@ public class sketchProfile extends PApplet {
         }
     }
     
+    /**
+     * Method called whenever the mouse is pressed.
+     * Handles mouse interactions for the exit bar to return to the main menu.
+     */
     public void mousePressed() {
 		//exit bar
 	    if (isExitHovered) {
@@ -89,6 +120,10 @@ public class sketchProfile extends PApplet {
 	    }
     }
 
+    /**
+     * Method to display the user profile information on the screen.
+     * Displays the user's username, orientation, identity, and status.
+     */
     private void displayUserProfile() {
         // Display user profile information on the screen
         textAlign(CENTER);
@@ -104,10 +139,14 @@ public class sketchProfile extends PApplet {
         text("Status: " + userProfile.status, width / 2, 320);
     }
     
+    /**
+     * Method to draw the back bar and change its appearance based on hover state.
+     */
     private void backBar() {
 		noStroke();
 		textSize(20);
 
+		//check hover
 	    if (mouseX > 20 && mouseX < 380 && mouseY > 650 && mouseY < 690) {
 	        fill(244, 240); rect(20, 650, 360, 40, 90, 90, 90, 90);
 	        isExitHovered = true;
@@ -118,6 +157,7 @@ public class sketchProfile extends PApplet {
 	        fill(244);
 	    }
 
+	    //display
 	    textAlign(CENTER, CENTER);
 	    text("Back", 200, 670);
 	}

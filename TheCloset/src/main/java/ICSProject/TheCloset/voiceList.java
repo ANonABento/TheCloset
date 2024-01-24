@@ -3,6 +3,9 @@ package ICSProject.TheCloset;
 import com.sun.speech.freetts.Voice;
 import com.sun.speech.freetts.VoiceManager;
 
+/**
+ * The `voiceList` class lists and prints available voices using FreeTTS and Mbrola.
+ */
 public class voiceList {
     private static Voice[] voices;
 
@@ -20,7 +23,7 @@ public class voiceList {
         voices = vm.getVoices();
 
         for (Voice voice : voices) {
-            // Find out what voices are available.
+            //print out what voices are available.
             System.out.println(voice.getName() + " - " + voice.getDescription());
         }
     }

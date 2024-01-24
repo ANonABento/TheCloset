@@ -7,28 +7,48 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+/**
+ * This class represents the main menu of the application using Processing.
+ * It provides options to access the user profile, search for other users, enter the chatroom, or interact with the chatbot.
+ */
 public class sketchMenu extends PApplet{
 	
+	//variable declaration
+	//images
 	PImage imgDoorOpen;
 	PImage imgDoorClosed;
 	PImage imgRainbow;
 	
+	//user info
 	String username;
 	boolean loggedIn = false;
 	
+	//buttons
 	boolean isExitHovered = false;
 	
+	/**
+     * Setup method to initialize the menu.
+     * Loads images for the menu and checks if a user is logged in.
+     */
 	public void settings() {
 		size(400, 700);
 		checkUser();
 	}
 	
+	/**
+     * Setup method to load images for the menu.
+     */
 	public void setup() {
+		//load images with paths
 		imgDoorClosed = loadImage("images/doorClosed.png");
 		imgDoorOpen = loadImage("images/doorOpen.png");
 		imgRainbow = loadImage("images/rainbowBG.jpg");
 	}
 	
+	/**
+     * Draw method to continuously update and render the main menu.
+     * Displays options to access various features and handles mouse interactions.
+     */	
 	public void draw(){
 		background(54);
 		image(imgRainbow, 0, 0);
@@ -67,6 +87,10 @@ public class sketchMenu extends PApplet{
 //		System.out.println("y: "+mouseY);
 	}
 	
+	/**
+     * Method called whenever the mouse is pressed.
+     * Handles mouse interactions for menu options and exit.
+     */
 	//method whenever mouse is pressed
 	public void mousePressed() {
 		//if clicked in a button
@@ -115,6 +139,16 @@ public class sketchMenu extends PApplet{
 	    }
 	}
 	
+	/**
+     * Checks if the mouse is hovering over a specific area and returns the corresponding image.
+     *
+     * @param x1   X-coordinate of the top-left corner of the area.
+     * @param x2   X-coordinate of the bottom-right corner of the area.
+     * @param y1   Y-coordinate of the top-left corner of the area.
+     * @param y2   Y-coordinate of the bottom-right corner of the area.
+     * @param area Area identifier.
+     * @return Image to be displayed based on the hover state.
+     */
 	private PImage checkHover(int x1, int x2, int y1, int y2, int area) {
         if (mouseX > x1 && mouseX < x2 && mouseY > y1 && mouseY < y2) {
             return imgDoorOpen;
@@ -123,9 +157,13 @@ public class sketchMenu extends PApplet{
         }
     }
 	
+	/**
+     * Draws the exit bar and changes its appearance based on hover state.
+     */
 	private void exitBar() {
 		noStroke();
 
+		//check hover
 	    if (mouseX > 20 && mouseX < 380 && mouseY > 650 && mouseY < 690) {
 	        fill(24, 240); rect(20, 650, 360, 40, 90, 90, 90, 90);
 	        isExitHovered = true;
@@ -136,10 +174,15 @@ public class sketchMenu extends PApplet{
 	        fill(0);
 	    }
 
+	    //display
 	    textAlign(CENTER, CENTER);
 	    text("Exit", 200, 670);
 	}
 	
+	/**
+     * Checks if a user is logged in and retrieves the username.
+     * Updates the 'loggedIn' variable accordingly.
+     */
 	private void checkUser() {
         try {
         	//create a Scanner object
@@ -164,7 +207,11 @@ public class sketchMenu extends PApplet{
         }
 	}
 	
+	 /**
+     * Displays a welcome message to the user based on the login status.
+     */
 	private void welcomeUser() {
+		//change welcome message if user is logged in or not
 		String welcomeMsg;
 		if (!loggedIn) {
 			welcomeMsg = "Welcome!";
@@ -173,6 +220,7 @@ public class sketchMenu extends PApplet{
 			welcomeMsg = "Welcome back, " + username + "!";
 		}
 		
+		//display
 		textSize(28);
 		textAlign(CENTER, CENTER);
 		fill(0);
