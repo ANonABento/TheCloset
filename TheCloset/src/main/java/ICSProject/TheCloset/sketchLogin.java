@@ -157,7 +157,7 @@ public class sketchLogin extends PApplet{
 		    // read first line which contains user name
 		    String[] firstLine = scanner.nextLine().split(": ", 2);
 		    String[] secondLine = scanner.nextLine().split(": ", 2);
-		    if (firstLine[0].equals(nameText) && secondLine[0].equals(passwordText)) {
+		    if (firstLine[1].equals(nameText) && secondLine[1].equals(passwordText)) {
 		    	//delete this window
 			    surface.setVisible(false);
 

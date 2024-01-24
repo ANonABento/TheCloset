@@ -10,65 +10,54 @@ import org.alicebot.ab.MagicBooleans;
 import org.alicebot.ab.MagicStrings;
 import org.alicebot.ab.utils.IOUtils;
 
-public class systemRobot implements Runnable{
+public class systemRobot implements Runnable {
 
     // variable declaration
-	private static final boolean TRACE_MODE = false;
-	static String botName = "super";
-	private sketchRobot parent;
-	
-	public systemRobot(sketchRobot parent) {
-		this.parent = parent;
-	}
+    private static final boolean TRACE_MODE = false;
+    static String botName = "super";
+    private sketchRobot parent;
+    String userResponse;
+    
+    voiceRobot toVoice = new voiceRobot();
 
-    public void run(){
+    public systemRobot(sketchRobot parent) {
+        this.parent = parent;
+    }
 
-    	//start graphics
-    	//TypingAnimation theScreen = new TypingAnimation();
-        sketchRobot toScreen = new sketchRobot();
-        //PApplet.runSketch(new String[]{"ICSProject.TheCloset.sketchMain"}, theScreen);
-        
-        //audio for robot
-        voiceRobot toVoice = new voiceRobot();
-
+    public void run() {
         try {
-
             String resourcesPath = getResourcesPath();
-            System.out.println(resourcesPath);
             MagicBooleans.trace_mode = TRACE_MODE;
             Bot bot = new Bot("super", resourcesPath);
             Chat chatSession = new Chat(bot);
             bot.brain.nodeStats();
-            String textLine = "";
+            String textLine;
 
             while (true) {
-                System.out.print("Human : ");
-                textLine = IOUtils.readInputTextLine();
-                if ((textLine == null) || (textLine.length() < 1))
-                    textLine = MagicStrings.null_input;
-                if (textLine.equals("q")) {
-                    System.exit(0);
-                } else if (textLine.equals("wq")) {
-                    bot.writeQuit();
-                    System.exit(0);
-                } else {
+                textLine = userResponse;
+                System.out.println(textLine);
+
+                if (textLine != null && !textLine.isEmpty()) {
                     String request = textLine;
                     if (MagicBooleans.trace_mode) {
-                    	System.out.println("STATE=" + request + ":THAT=" + ((History) chatSession.thatHistory.get(0)).get(0) + ":TOPIC=" + chatSession.predicates.get("topic"));
+                        System.out.println("STATE=" + request + ":THAT=" + ((History) chatSession.thatHistory.get(0)).get(0) + ":TOPIC=" + chatSession.predicates.get("topic"));
                     }
                     String response = chatSession.multisentenceRespond(request);
                     while (response.contains("&lt;")) {
-                    	response = response.replace("&lt;", "<");
+                        response = response.replace("&lt;", "<");
                     }
                     while (response.contains("&gt;")) {
-                    	response = response.replace("&gt;", ">");
+                        response = response.replace("&gt;", ">");
                     }
-                    System.out.println("Robot : " + response);
-                    
+
                     //send robot response
                     parent.changeRobotResponse(response);
-                    toVoice.SpeakText(response);
                     
+                    //speak
+                    toVoice.speakText(response);
+                    
+                    //clear user response to avoid running the same response again
+                    userResponse = null;
                 }
             }
         } catch (Exception e) {
@@ -83,5 +72,9 @@ public class systemRobot implements Runnable{
         System.out.println(path);
         String resourcesPath = path + File.separator + "src" + File.separator + "main" + File.separator + "resources";
         return resourcesPath;
+    }
+
+    public synchronized void userResponse(String userInput) {
+        this.userResponse = userInput;
     }
 }

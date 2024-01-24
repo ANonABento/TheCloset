@@ -33,7 +33,7 @@ public class voiceRobot {
 	    }
 	}
 	
-	public void SpeakText(String response) {
+	public void speakText(String response) {
 		//play the audio of what the text is
 		voice.speak(response);
 	}

@@ -1,7 +1,6 @@
 package ICSProject.TheCloset;
 
 import processing.core.PApplet;
-import processing.core.PImage;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,47 +20,51 @@ public class sketchProfile extends PApplet {
 	}
 	
 	private void checkUser() {
-	    try {
-	        Scanner scanner = new Scanner(new File("data/txt/userInfo"));
+        try {
+            Scanner scanner = new Scanner(new File("data/txt/userInfo"));
 
-	        //empty profile
-	        String[] arrProfile = new String[]{"", "", "", "", ""};
-	        
-	        //look through whole file
-	        while (scanner.hasNextLine()) {
-	            String line = scanner.nextLine();
-	            String[] arrLine = line.split(": ", 2);
+            userProfile = new profile();
+            readUserProfile(scanner);
 
-	            if (arrLine.length == 2) {
-	                String label = arrLine[0];
-	                String value = arrLine[1];
+            // Close the scanner
+            scanner.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	private void readUserProfile(Scanner scanner) {
+        if (scanner.hasNextLine()) {
+            String line = scanner.nextLine();
+            String[] arrLine = line.split(": ", 2);
 
-	                switch (label) {
-	                    case "Username":
-	                    	arrProfile[0] = value;
-	                        break;
-	                    case "Password":
-	                    	arrProfile[1] = value;
-	                        break;
-	                    case "GenderOrientation":
-	                    	arrProfile[2] = value;
-	                        break;
-	                    case "Status":
-	                    	arrProfile[3] = value;
-	                        break;
-	                    case "GenderIdentity":
-	                    	arrProfile[4] = value;
-	                        break;
-	                }
-	            }
-	        }
+            if (arrLine.length == 2) {
+                String label = arrLine[0];
+                String value = arrLine[1];
 
-	        // Close the scanner
-	        scanner.close();
-	    } catch (FileNotFoundException e) {
-	        e.printStackTrace();
-	    }
-	}
+                switch (label) {
+                    case "Username":
+                        userProfile.username = value;
+                        break;
+                    case "Password":
+                        userProfile.password = value;
+                        break;
+                    case "Orientation":
+                        userProfile.orientation = value;
+                        break;
+                    case "Status":
+                        userProfile.status = value;
+                        break;
+                    case "Identity":
+                        userProfile.identity = value;
+                        break;
+                }
+            }
+
+            // Recursive call to read the next line
+            readUserProfile(scanner);
+        }
+    }
 	
 	private void displayUserProfile() {
         // Display user profile information on the screen
@@ -74,8 +77,8 @@ public class sketchProfile extends PApplet {
         // Display user information
         textSize(16);
         text("Username: " + userProfile.username, width / 2, 100);
-        text("Gender Orientation: " + userProfile.orientation, width / 2, 130);
-        text("Gender Identity: " + userProfile.identity, width / 2, 160);
+        text("Orientation: " + userProfile.orientation, width / 2, 130);
+        text("Identity: " + userProfile.identity, width / 2, 160);
         text("Status: " + userProfile.status, width / 2, 190);
     }
 }
